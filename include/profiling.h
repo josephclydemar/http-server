@@ -3,9 +3,7 @@
 
 #include "logging.h"
 
-#if NOPROFL
-    #define PROFL_STOP(_component, _expr, ...) ((void)(_expr))
-#else
+#if PROFL
     // runtime checking
     #define PROFL_STOP(_component, _expr, ...) do {                            \
         if (!(_expr)) {                                                        \
@@ -20,6 +18,8 @@
             exit(0);                                                           \
         }                                                                      \
     } while(0)
+#else
+    #define PROFL_STOP(_component, _expr, ...) ((void)(_expr))
 #endif
 
 

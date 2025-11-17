@@ -345,6 +345,7 @@
 
     #define INFO_LOG(_component, _fmt, ...)
     #define WARN_LOG(_component, _fmt, ...)
+    #define PROFL_LOG(_component, _fmt, ...)
     #define DEBUG_LOG(_component, _fmt, ...)
     #define ERROR_LOG(_component, _fmt, ...)
     #define FATAL_LOG(_component, _fmt, ...)
@@ -400,6 +401,21 @@
             YELLOW_COLOR_TEXT "%s" DEFAULT_COLOR_TEXT ") - ("                      \
             YELLOW_COLOR_TEXT "%s" DEFAULT_COLOR_TEXT ") "                         \
             YELLOW_COLOR_TEXT _fmt DEFAULT_COLOR_TEXT "\n",                        \
+            time_str, __func__, _component, ##__VA_ARGS__);                        \
+    } while(0)
+
+    #define PROFL_LOG(_component, _fmt, ...) do {                                  \
+        char time_str[100];                                                        \
+        time_t rawtime;                                                            \
+        struct tm* timeinfo;                                                       \
+        time(&rawtime);                                                            \
+        timeinfo = localtime(&rawtime);                                            \
+        strftime(time_str, sizeof(time_str), "%Y-%m-%d %H:%M:%S", timeinfo);       \
+        printf("[ " MAGENTA_COLOR_TEXT "PROFL" DEFAULT_COLOR_TEXT " ]  "           \
+            MAGENTA_COLOR_TEXT "%s" DEFAULT_COLOR_TEXT " - ("                      \
+            MAGENTA_COLOR_TEXT "%s" DEFAULT_COLOR_TEXT ") - ("                     \
+            MAGENTA_COLOR_TEXT "%s" DEFAULT_COLOR_TEXT ") "                        \
+            MAGENTA_COLOR_TEXT _fmt DEFAULT_COLOR_TEXT "\n",                       \
             time_str, __func__, _component, ##__VA_ARGS__);                        \
     } while(0)
 

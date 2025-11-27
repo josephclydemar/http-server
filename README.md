@@ -1,5 +1,5 @@
 # HTTP Server
-This is a small HTTP/1.1 server I built to explore multithreading and low-level networking; it sends the client's headers back as JSON response.
+This is a small HTTP/1.1 server I built to explore multithreading and low-level networking. For now, it just sends the client's headers back as JSON response.
 
 ## Requirements
 - POSIX-compatible environment (Linux, macOS, WSL, etc.).

@@ -88,7 +88,7 @@ void* worker_fn(void* param) {
 
   /* Logging related code */
   pthread_mutex_lock(&logger_mgr.logger_lock);
-  INFO_LOG_REDI(logger_mgr.holder_buf, DTYPE_STR_MAX_LEN, "SELF", "tid: %lu", tid);
+  INFO_LOG_REDI(logger_mgr.holder_buf, DTYPE_STR_MAX_LEN, "SELF", "tid: 0x%lX", tid);
   memcpy(log_data.d_str, logger_mgr.holder_buf, DTYPE_STR_MAX_LEN);
   enqueue(&logger_mgr.logger_queue, log_data);
   pthread_mutex_unlock(&logger_mgr.logger_lock);
@@ -123,7 +123,7 @@ void* worker_fn(void* param) {
 
     if (headers->headers_ptr[0].ptr != NULL) {
       pthread_mutex_lock(&logger_mgr.logger_lock);
-      INFO_LOG_REDI(logger_mgr.holder_buf, DTYPE_STR_MAX_LEN, "PATH", "[tid: %lu]" YELLOW_COLOR_TEXT  "   %s" DEFAULT_COLOR_TEXT, tid, headers->headers_ptr[0].ptr);
+      INFO_LOG_REDI(logger_mgr.holder_buf, DTYPE_STR_MAX_LEN, "PATH", "[tid: 0x%lX]" YELLOW_COLOR_TEXT  "   %s" DEFAULT_COLOR_TEXT, tid, headers->headers_ptr[0].ptr);
       memcpy(log_data.d_str, logger_mgr.holder_buf, DTYPE_STR_MAX_LEN);
       enqueue(&logger_mgr.logger_queue, log_data);
       pthread_mutex_unlock(&logger_mgr.logger_lock);
